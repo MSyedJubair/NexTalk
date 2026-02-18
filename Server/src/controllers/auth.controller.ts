@@ -1,5 +1,6 @@
 import User from "../models/user.model";
 import { generateToken } from "../lib/utils";
+import cloudinary from "../lib/cloudinary";
 
 import bcryptjs from "bcryptjs";
 import { Request, Response } from "express";
@@ -77,6 +78,7 @@ export const signin = async (req: Request, res: Response) => {
 
 export const logout = (req: Request, res: Response) => {
   try {
+    kw;
     res.cookie("jwt", "", {
       maxAge: 0,
       httpOnly: true,
@@ -91,9 +93,32 @@ export const logout = (req: Request, res: Response) => {
 
 export const updateProfile = (req: Request, res: Response) => {
   try {
+    const { profilePic } = req.body;
+    const userId = req.user._id;
+
+    if (!profilePic) {
+      res.status(400).json({ message: "Profile picture is required" });
+    }
+
+    const uploadedImage = cloudinary.uploader.upload(profilePic);
+
+    const updatedUser = User.findByIdAndUpdate(userId, {
+      profilePic: uploadedImage.secure_url,
+    });
+
+    res.Status(200).json({ updatedUser });
     
   } catch (error) {
-    console.log(error)
-    res.status(500).json({message: "Internal Server Error"})
+    console.log(error);
+    res.status(500).json({ message: "Internal Server Error" });
   }
+};
+
+export const checkAuth = (req: Request, res: Response) => {
+  try {
+    res.status(200).json({message: 'Authenticated'})
+  } catch (error) {
+    console.error(error);
+  }
+  
 }
