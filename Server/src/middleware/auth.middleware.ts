@@ -1,6 +1,6 @@
 import { Response, Request, NextFunction } from "express";
-import jwt from 'jsonwebtoken'
-import User from '../models/user.model'
+import jwt, { JwtPayload } from 'jsonwebtoken'
+import User from '../models/user.model.js'
 
 const protectedRoute = async (
   req: Request,
@@ -14,9 +14,9 @@ const protectedRoute = async (
       res.status(401).json({ message: "No token provided" });
     }
 
-    const jwtSecret = process.env.JWT_SECRET
+    const jwtSecret = process.env.JWT_SECRET 
 
-    const decoded = jwt.verify(token, jwtSecret)
+    const decoded = jwt.verify(token, jwtSecret!) as JwtPayload & { userId: string };
 
     if(!decoded) {
         res.status(401).json({ message: "Token Invalid" });
