@@ -1,6 +1,6 @@
-import User from "../models/user.model";
-import { generateToken } from "../lib/utils";
-import cloudinary from "../lib/cloudinary";
+import User from "../models/user.model.js";
+import cloudinary from "../lib/cloudinary.js";
+import { generateToken } from "../lib/utils.js";
 
 import bcryptjs from "bcryptjs";
 import { Request, Response } from "express";
