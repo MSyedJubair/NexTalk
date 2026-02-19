@@ -1,9 +1,15 @@
-import { Outlet } from "react-router"
+import { useGetAuthStatus } from "@/lib/query";
+import { Outlet, useNavigate } from "react-router";
 
 const AuthLayout = () => {
-  return (
-    <Outlet/>
-  )
-}
+  const navigate = useNavigate();
+  const { data, isLoading } = useGetAuthStatus();
 
-export default AuthLayout
+  if (data) {
+    navigate('/')
+  }
+  
+  return <Outlet />;
+};
+
+export default AuthLayout;

@@ -84,6 +84,8 @@ export const logout = (req: Request, res: Response) => {
       secure: process.env.ENVIROMENT === "production",
       sameSite: "strict",
     });
+    res.status(200).json({ message: "Logged out successfully" });
+    
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error" });

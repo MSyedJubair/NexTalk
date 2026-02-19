@@ -11,29 +11,24 @@ const protectedRoute = async (
     const token = req.cookies.jwt;
 
     if (!token) {
-      res.status(401).json({ message: "No token provided" });
+      return res.status(401).json({ message: "No token provided" });
     }
 
-    const jwtSecret = process.env.JWT_SECRET 
+    const decoded = jwt.verify(
+      token,
+      process.env.JWT_SECRET!
+    ) as JwtPayload & { userId: string };
 
-    const decoded = jwt.verify(token, jwtSecret!) as JwtPayload & { userId: string };
+    const user = await User.findById(decoded.userId).select("-password");
 
-    if(!decoded) {
-        res.status(401).json({ message: "Token Invalid" });
+    if (!user) {
+      return res.status(401).json({ message: "User not found" });
     }
 
-    const user = User.findById(decoded.userId).select('-password')
-
-    if (!user){
-        res.status(401).json({ message: "User not Found" });
-    }
-
-    req.user = user
-
-    next()
-
+    req.user = user;
+    next();
   } catch (error) {
-    console.error(error);
+    return res.status(401).json({ message: "Unauthorized" });
   }
 };
 
