@@ -1,3 +1,4 @@
+import type { User } from "@/Types";
 import AxiosInstance from "./axios";
 
 export const getUser = async () => {
@@ -10,7 +11,7 @@ export const getUser = async () => {
   }
 };
 
-export const signup = async (data: any) => {
+export const signup = async (data: User) => {
   try {
     const response = await AxiosInstance.post("/auth/signup", data);
     console.log(response);
@@ -21,7 +22,7 @@ export const signup = async (data: any) => {
   }
 };
 
-export const signin = async (data: any) => {
+export const signin = async (data: User) => {
   try {
     const response = await AxiosInstance.post("/auth/signin", data);
     console.log(response);
