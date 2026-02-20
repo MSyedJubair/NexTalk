@@ -2,9 +2,10 @@ interface AvatarProps {
   name: string;
   imageUrl?: string;
   size?: number;
+  className?: string
 }
 
-const Avatar = ({ name, imageUrl, size = 40 }: AvatarProps) => {
+const Avatar = ({ name, imageUrl, size = 40, className }: AvatarProps) => {
   const firstLetter = name?.charAt(0).toUpperCase();
 
   const getColorFromName = (name: string) => {
@@ -38,7 +39,7 @@ const Avatar = ({ name, imageUrl, size = 40 }: AvatarProps) => {
 
   return (
     <div
-      className={`rounded-full flex items-center justify-center text-white font-semibold ${getColorFromName(
+      className={`rounded-full flex items-center justify-center text-white font-semibold ${className} ${getColorFromName(
         name
       )}`}
       style={{ width: size, height: size }}

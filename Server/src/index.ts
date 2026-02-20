@@ -46,9 +46,11 @@ io.on("connection", (socket) => {
   console.log("User connected:", socket.id);
 
   // when user logs in
-  socket.on("join", (userId) => {
+  socket.on("join", (userId:string) => {
     onlineUsers.set(userId, socket.id);
     socket.join(userId); // create private room
+
+    io.emit("onlineUsers", Array.from(onlineUsers.keys()));
   });
 
   // handle sending message
@@ -73,7 +75,10 @@ io.on("connection", (socket) => {
   });
 
   socket.on("disconnect", () => {
-    console.log("User disconnected");
+    onlineUsers.delete(socket.userId);
+
+    // 🔥 Emit updated list
+    io.emit("onlineUsers", Array.from(onlineUsers.keys()));
   });
 });
 

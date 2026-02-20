@@ -30,14 +30,18 @@ const RootLayout = () => {
 
   return (
     <ResizablePanelGroup orientation="horizontal" className="w-full h-screen">
-      <ResizablePanel defaultSize={35} minSize={20} >
+      <ResizablePanel
+        defaultSize={35}
+        maxSize={'50%'}
+        minSize={'8%'}
+      >
         <div className="h-full">
           <SideBar />
         </div>
       </ResizablePanel>
       <ResizableHandle withHandle />
 
-      <ResizablePanel defaultSize={65} >
+      <ResizablePanel defaultSize={65}>
         <div className="h-full">
           <Outlet />
         </div>
