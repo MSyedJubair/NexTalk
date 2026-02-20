@@ -4,6 +4,8 @@ import RootLayout from "./Root/RootLayout"
 import AuthLayout from "./Auth/AuthLayout"
 import Signin from "./Auth/Forms/Signin"
 import Signup from "./Auth/Forms/Signup"
+import Chat from "./Root/Pages/Chat"
+
 const App = () => {
   return (
     <Routes>
@@ -16,6 +18,7 @@ const App = () => {
       {/* Private Routes */}
       <Route element={<RootLayout/>}>
         <Route index element={<Home/>}/>
+        <Route path="/user/:id" element={<Chat/>} />
       </Route>
     </Routes>
   )

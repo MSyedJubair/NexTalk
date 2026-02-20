@@ -2,15 +2,8 @@ import AxiosInstance from "./axios";
 
 export const getUser = async () => {
   try {
-    await AxiosInstance.get("/check")
-      .then((res) => {
-        console.log(res.data);
-        return true;
-      })
-      .catch((error) => {
-        console.log(error);
-        return false;
-      });
+    const response = await AxiosInstance.get("/users/me");
+    return response.data;
   } catch (error) {
     console.error(error);
     return false;
@@ -53,10 +46,27 @@ export const logout = async () => {
 export const checkAuth = async () => {
   try {
     const response = await AxiosInstance.get("/auth/check");
-    console.log(response);
-    return true;
+    return response.data;
   } catch (error) {
     console.error(error);
     return false;
   }
+};
+
+export const getUsers = async () => {
+  try {
+    const response = await AxiosInstance.get("/users/all");
+
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+};
+
+export const getMessages = async (userId: string) => {
+
+
+  const response = await AxiosInstance.get(`/message/${userId}`);
+  return response.data || [];
 };

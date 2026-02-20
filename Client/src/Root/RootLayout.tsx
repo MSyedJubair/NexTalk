@@ -8,15 +8,16 @@ const RootLayout = () => {
   const { data, isLoading, isError } = useGetAuthStatus();
   const navigate = useNavigate()
 
-  if (!data){
-    navigate('/sign-up')
-  }
-
   if (isLoading) {
     return (
       <Spinner/>
     )
   }
+
+  if (!isLoading && !data){
+    navigate('/sign-up')
+  }
+
   if (isError) {
     toast('error')
   }
