@@ -51,6 +51,10 @@
   --sidebar-ring: oklch(0.708 0 0);
 }
 
+html, body, #root {
+  height: 100%;
+}
+
 a {
   font-weight: 500;
   color: #646cff;

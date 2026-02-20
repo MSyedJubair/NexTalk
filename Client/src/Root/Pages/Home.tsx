@@ -2,7 +2,7 @@ import React from "react";
 
 const WelcomeScreen = () => {
   return (
-    <div className="flex-1 flex flex-col justify-center items-center bg-black text-white p-6">
+    <div className="flex-1 flex flex-col min-h-screen justify-center items-center bg-black text-white p-6">
       {/* Icon / Illustration */}
       <div className="mb-6">
         <svg

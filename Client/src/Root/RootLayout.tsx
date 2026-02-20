@@ -3,30 +3,46 @@ import { Spinner } from "@/components/ui/spinner";
 import { useGetAuthStatus } from "@/lib/query";
 import { Outlet, useNavigate } from "react-router";
 import { toast } from "sonner";
+import {
+  ResizableHandle,
+  ResizablePanel,
+  ResizablePanelGroup,
+} from "@/components/ui/resizable";
+import { useEffect } from "react";
 
 const RootLayout = () => {
   const { data, isLoading, isError } = useGetAuthStatus();
-  const navigate = useNavigate()
-
-  if (isLoading) {
-    return (
-      <Spinner/>
-    )
-  }
-
-  if (!isLoading && !data){
-    navigate('/sign-up')
-  }
+  const navigate = useNavigate();
 
   if (isError) {
-    toast('error')
+    toast("error");
+  }
+
+  useEffect(() => {
+    if (!isLoading && !data) {
+      navigate("/sign-up");
+    }
+  }, [isLoading, data, navigate]);
+
+  if (isLoading) {
+    return <Spinner />;
   }
 
   return (
-    <div className="flex flex-row w-full min-h-screen">
-      <SideBar />
-      <Outlet />
-    </div>
+    <ResizablePanelGroup orientation="horizontal" className="w-full h-screen">
+      <ResizablePanel defaultSize={35} minSize={20} >
+        <div className="h-full">
+          <SideBar />
+        </div>
+      </ResizablePanel>
+      <ResizableHandle withHandle />
+
+      <ResizablePanel defaultSize={65} >
+        <div className="h-full">
+          <Outlet />
+        </div>
+      </ResizablePanel>
+    </ResizablePanelGroup>
   );
 };
 
