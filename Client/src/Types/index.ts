@@ -5,3 +5,10 @@ export interface message {
   text: string;
   image: string;
 }
+
+export type User = {
+  _id: number;
+  fullname: string;
+  email: string;
+  imageUrl: string;
+};

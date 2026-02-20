@@ -1,27 +1,20 @@
-type User = {
-  _id: number;
-  fullname: string;
-  email: string;
-  imageUrl: string;
-};
+import { useParams } from "react-router";
+import Avatar from "./Avatar";
+import { type User } from "@/Types";
 
-
-const User = (user:User, activeUser:User, setActiveUser) => {
+const UserProfile = ({ user }: {user: User}) => {
+  const { id } = useParams();
+  
   return (
     <div
       key={user._id}
-      onClick={() => setActiveUser(user)}
       className={`flex items-center gap-3 p-3 rounded-xl cursor-pointer transition ${
-        activeUser?._id === user._id
+        id === user._id.toString()
           ? "bg-indigo-600/20 border border-indigo-500"
           : "hover:bg-gray-800"
       }`}
     >
-      <img
-        src={user.imageUrl || "../ProfilePlaceholder.png"}
-        alt={user.fullname}
-        className="w-10 h-10 rounded-full object-cover"
-      />
+      <Avatar imageUrl={user.imageUrl} name={user.fullname} />
       <div className="flex-1">
         <p className="font-medium">{user.fullname}</p>
         <p className="text-sm text-gray-400 truncate">{user.email}</p>
@@ -30,4 +23,4 @@ const User = (user:User, activeUser:User, setActiveUser) => {
   );
 };
 
-export default User;
+export default UserProfile;

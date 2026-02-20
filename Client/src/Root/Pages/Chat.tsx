@@ -7,8 +7,6 @@ import { useEffect, useRef, useState, type FormEvent } from "react";
 import { useParams } from "react-router";
 import { type message } from "@/Types";
 
-
-
 const Chat = () => {
   const { id } = useParams();
 
@@ -23,7 +21,6 @@ const Chat = () => {
   const scrollToBottom = () => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   };
-
   const sendMessage = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -43,8 +40,6 @@ const Chat = () => {
 
     socket.emit("join", user._id);
   }, [user?._id]);
-
-
 
   useEffect(() => {
     if (!isLoading) {
@@ -71,14 +66,17 @@ const Chat = () => {
   }, [messages]);
 
   return (
-    <div className="flex flex-col w-full h-screen bg-zinc-900 text-white">
+    <div className="flex w-full flex-col h-screen bg-linear-to-b from-zinc-950 via-zinc-900 to-zinc-950 text-zinc-100">
       {/* Header */}
-      <div className="p-4 border-b border-zinc-700 font-semibold text-lg">
-        Chat
+      <div className="sticky top-0 z-10 backdrop-blur-md bg-zinc-900/70 border-b border-zinc-800 px-6 py-4 flex items-center justify-between">
+        <div>
+          <h2 className="text-lg font-semibold tracking-tight">Chat</h2>
+          <p className="text-xs text-zinc-400">Realtime conversation</p>
+        </div>
       </div>
 
       {/* Messages */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-3">
+      <div className="flex-1 overflow-y-auto px-6 py-6 space-y-6">
         {isLoading ? (
           <Spinner />
         ) : messages && messages.length > 0 ? (
@@ -91,10 +89,10 @@ const Chat = () => {
                 className={`flex ${isOwn ? "justify-end" : "justify-start"}`}
               >
                 <div
-                  className={`max-w-xs px-4 py-2 rounded-2xl text-sm ${
+                  className={`relative max-w-md px-5 py-3 text-sm rounded-2xl shadow-md transition-all ${
                     isOwn
-                      ? "bg-blue-600 text-white rounded-br-none"
-                      : "bg-zinc-700 text-white rounded-bl-none"
+                      ? "bg-blue-600/90 text-white rounded-br-md"
+                      : "bg-zinc-800 text-zinc-100 rounded-bl-md border border-zinc-700"
                   }`}
                 >
                   {msg.text}
@@ -103,29 +101,33 @@ const Chat = () => {
             );
           })
         ) : (
-          <div className="text-zinc-400 text-sm">No messages yet</div>
+          <div className="flex items-center justify-center h-full text-zinc-500 text-sm">
+            No messages yet
+          </div>
         )}
         <div ref={bottomRef} />
       </div>
 
-      {/* Input Area */}
+      {/* Input */}
       <form
-        className="p-4 border-t border-zinc-700 flex gap-2"
         onSubmit={sendMessage}
+        className="sticky bottom-0 backdrop-blur-md bg-zinc-900/80 border-t border-zinc-800 px-6 py-4"
       >
-        <Input
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          className="bg-zinc-800 border-zinc-600 text-white"
-          placeholder="Type a message..."
-        />
+        <div className="flex items-center gap-3 bg-zinc-800/70 border border-zinc-700 rounded-full px-4 py-2 focus-within:border-blue-500 transition">
+          <Input
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            className="flex-1 bg-transparent border-none focus-visible:ring-0 text-sm text-zinc-100 placeholder:text-zinc-500"
+            placeholder="Type a message..."
+          />
 
-        <Button
-          type="submit"
-          className="bg-blue-600 hover:bg-blue-700 text-white"
-        >
-          Send
-        </Button>
+          <Button
+            type="submit"
+            className="rounded-full px-5 bg-blue-600 hover:bg-blue-700 text-white text-sm transition"
+          >
+            Send
+          </Button>
+        </div>
       </form>
     </div>
   );
