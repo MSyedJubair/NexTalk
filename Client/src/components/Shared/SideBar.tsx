@@ -28,6 +28,7 @@ const SideBar = () => {
   useEffect(() => {
     socket.on("onlineUsers", (users) => {
       setOnlineUsers(users);
+      console.log(onlineUsers)
     });
 
     return () => {
@@ -86,9 +87,7 @@ const SideBar = () => {
             `}
           >
             
-            <UserProfile user={user} collapsed={collapsed} isOnline={
-              onlineUsers.length > 0 && onlineUsers.includes(user._id)
-            } />
+            <UserProfile user={user} collapsed={collapsed}/>
           </NavLink>
         ))}
       </div>
