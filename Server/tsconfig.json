@@ -1,15 +1,29 @@
 {
   "compilerOptions": {
-    "target": "ES2022",
-    "module": "ESNext",
-    "moduleResolution": "bundler",
-    "outDir": "./dist",
-    "rootDir": "./src",
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "incremental": true,
+    /* Base Options */
+    "target": "ES2022",                             /* Target modern Node.js versions */
+    "module": "NodeNext",                           /* Modern module resolution for ESM/CJS */
+    "moduleResolution": "NodeNext",
+    "lib": ["ESNext"],                              /* Include latest JS features */
+    
+    /* Project Structure */
+    "rootDir": "./src",                             /* Source files location */
+    "outDir": "./dist",                             /* Compiled output location */
+    "removeComments": true,                         /* Strip comments for smaller files */
+    
+    /* Strictness & Safety */
+    "strict": true,                                 /* Enable all strict type-checking */
+    "noImplicitAny": true,                          /* Error on expressions with inferred 'any' */
+    "noUncheckedIndexedAccess": true,               /* Safer object/array access */
+    "forceConsistentCasingInFileNames": true,       /* Ensure cross-platform compatibility */
+    
+    /* Compatibility & Performance */
+    "esModuleInterop": true,                        /* Simplifies importing CommonJS modules */
+    "skipLibCheck": true,                           /* Skip type checking of declaration files */
+    "resolveJsonModule": true,                      /* Allow importing .json files */
+    "sourceMap": true,                              /* Enable debugging via .map files */
+    "incremental": true                             /* Speed up subsequent builds */
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules"]   
+  "include": ["src/**/*"],                          /* Files to include */
+  "exclude": ["node_modules", "dist", "**/*.spec.ts"] /* Files to ignore */
 }

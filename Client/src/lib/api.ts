@@ -66,8 +66,6 @@ export const getUsers = async () => {
 };
 
 export const getMessages = async (userId: string) => {
-
-
   const response = await AxiosInstance.get(`/message/${userId}`);
   return response.data || [];
 };

@@ -5,24 +5,23 @@ import cors from "cors";
 import dns from "node:dns";
 import http from "http";
 import { Server } from "socket.io";
-
-dns.setServers(["8.8.8.8", "8.8.4.4"]);
-
 import authRoutes from "./routes/auth.route.js";
 import userRoute from "./routes/user.route.js";
 import messageRoute from "./routes/message.route.js";
 import { connectDB } from "./lib/db.js";
 import Message from "./models/message.model.js";
 
+dns.setServers(["8.8.8.8", "8.8.4.4"]);
 dotenv.config();
 
 const app = express();
 const server = http.createServer(app);
 const PORT = process.env.PORT;
+const CLIENT_URL = process.env.CLIENT_URL
 
 app.use(
   cors({
-    origin: ["http://localhost:5173"],
+    origin: [CLIENT_URL!],
     credentials: true,
   }),
 );
@@ -35,8 +34,9 @@ app.use("/api/message", messageRoute);
 
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5173",
+    origin: CLIENT_URL,
     methods: ["GET", "POST"],
+    credentials: true, 
   },
 });
 
