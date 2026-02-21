@@ -34,7 +34,7 @@ app.use("/api/message", messageRoute);
 
 const io = new Server(server, {
   cors: {
-    origin: 'https://nextalk-ten.vercel.app',
+    origin: CLIENT_URL,
     methods: ["GET", "POST"],
     credentials: true, 
   },

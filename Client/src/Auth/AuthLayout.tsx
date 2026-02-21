@@ -8,7 +8,7 @@ const AuthLayout = () => {
   const { data, isLoading } = useGetAuthStatus();
 
   useEffect(() => {
-    if (!data && !isLoading) {
+    if (data && !isLoading) {
       navigate("/");
     }
   }, [isLoading, data, navigate]);
