@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken'
 import { ObjectId } from 'mongoose'
 
 export const generateToken = (res: Response, userId: any) => {
-    const jwtSecret = process.env.JWT_SECRET
+    const jwtSecret = process.env.JWT_SECRET!
 
     const payload = {
         userId: userId,

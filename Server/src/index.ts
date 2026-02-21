@@ -14,10 +14,16 @@ import Message from "./models/message.model.js";
 dns.setServers(["8.8.8.8", "8.8.4.4"]);
 dotenv.config();
 
+declare module "socket.io" {
+  interface Socket {
+    userId?: string;
+  }
+}
+
 const app = express();
 const server = http.createServer(app);
-const PORT = process.env.PORT;
-const CLIENT_URL = process.env.CLIENT_URL
+const PORT = process.env.PORT!;
+const CLIENT_URL = process.env.CLIENT_URL!
 
 app.use(
   cors({
