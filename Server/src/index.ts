@@ -21,7 +21,7 @@ const CLIENT_URL = process.env.CLIENT_URL
 
 app.use(
   cors({
-    origin: [CLIENT_URL!],
+    origin: [CLIENT_URL!, 'https://nextalk-ten.vercel.app'],
     credentials: true,
   }),
 );
@@ -34,7 +34,7 @@ app.use("/api/message", messageRoute);
 
 const io = new Server(server, {
   cors: {
-    origin: CLIENT_URL,
+    origin: 'https://nextalk-ten.vercel.app',
     methods: ["GET", "POST"],
     credentials: true, 
   },
