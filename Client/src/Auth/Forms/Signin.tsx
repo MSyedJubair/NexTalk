@@ -56,12 +56,13 @@ const Signin = () => {
         toast("Failed to login, Try again");
       }
     } catch (error) {
+      console.log(error);
       toast("Something went wrong. Please try again.");
     }
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-950 via-gray-900 to-black px-4">
+    <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-gray-950 via-gray-900 to-black px-4">
       <Card className="w-full max-w-md bg-gray-900/80 backdrop-blur border-gray-800 shadow-2xl">
         <CardHeader className="space-y-2 text-center">
           <CardTitle className="text-3xl font-bold text-white">
@@ -135,7 +136,7 @@ const Signin = () => {
             type="submit"
             form="signin-form"
             disabled={isSubmitting}
-            className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full bg-linear-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isSubmitting ? "Signing In..." : "Sign In"}
           </Button>

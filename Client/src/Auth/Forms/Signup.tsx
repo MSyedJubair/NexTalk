@@ -70,7 +70,7 @@ const Signup = () => {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-950 via-gray-900 to-black px-4">
+    <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-gray-950 via-gray-900 to-black px-4">
       <Card className="w-full max-w-md bg-gray-900/80 backdrop-blur border-gray-800 shadow-2xl">
         <CardHeader className="space-y-2 text-center">
           <CardTitle className="text-3xl font-bold text-white">
@@ -167,7 +167,7 @@ const Signup = () => {
             type="submit"
             form="signup-form"
             disabled={loading}
-            className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-semibold flex items-center justify-center gap-2"
+            className="w-full bg-linear-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-semibold flex items-center justify-center gap-2"
           >
             {loading && <Spinner className="h-4 w-4 animate-spin" />}
             {loading ? "Creating Account..." : "Create Account"}

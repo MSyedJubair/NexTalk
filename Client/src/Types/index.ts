@@ -12,3 +12,9 @@ export type User = {
   email: string;
   imageUrl: string;
 };
+
+export type SignUpUser = {
+  fullname: string;
+  email: string;
+  imageUrl: string;
+}

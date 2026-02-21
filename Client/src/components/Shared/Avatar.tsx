@@ -2,7 +2,7 @@ interface AvatarProps {
   name: string;
   imageUrl?: string;
   size?: number;
-  className?: string
+  className?: string;
 }
 
 const Avatar = ({ name, imageUrl, size = 40, className }: AvatarProps) => {
@@ -19,9 +19,11 @@ const Avatar = ({ name, imageUrl, size = 40, className }: AvatarProps) => {
       "bg-indigo-500",
     ];
 
-    const index =
-      name.split("").reduce((acc, char) => acc + char.charCodeAt(0), 0) %
-      colors.length;
+    let index = 0
+
+    if (name) {
+      index = name.split("").reduce((acc, char) => acc + char.charCodeAt(0), 0) % colors.length;
+    }
 
     return colors[index];
   };
@@ -40,7 +42,7 @@ const Avatar = ({ name, imageUrl, size = 40, className }: AvatarProps) => {
   return (
     <div
       className={`rounded-full flex items-center justify-center text-white font-semibold ${className} ${getColorFromName(
-        name
+        name,
       )}`}
       style={{ width: size, height: size }}
     >
@@ -49,4 +51,4 @@ const Avatar = ({ name, imageUrl, size = 40, className }: AvatarProps) => {
   );
 };
 
-export default Avatar
+export default Avatar;

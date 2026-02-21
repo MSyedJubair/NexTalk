@@ -87,7 +87,7 @@ const SideBar = () => {
           >
             
             <UserProfile user={user} collapsed={collapsed} isOnline={
-              onlineUsers.includes(user._id)
+              onlineUsers.length > 0 && onlineUsers.includes(user._id)
             } />
           </NavLink>
         ))}
