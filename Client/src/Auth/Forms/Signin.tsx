@@ -22,6 +22,7 @@ import { Input } from "@/components/ui/input";
 import { Link, useNavigate } from "react-router";
 import { signin } from "@/lib/api";
 import { toast } from "sonner";
+import { useQueryClient } from "@tanstack/react-query";
 
 const formSchema = z.object({
   email: z.string().email("Please enter a valid email address."),
@@ -33,6 +34,7 @@ const formSchema = z.object({
 
 const Signin = () => {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -51,6 +53,7 @@ const Signin = () => {
       const status = await signin(data);
 
       if (status) {
+        await queryClient.invalidateQueries({ queryKey: ["getCurrentUser", "getAuthStatus"] })
         navigate("/");
       } else {
         toast("Failed to login, Try again");
